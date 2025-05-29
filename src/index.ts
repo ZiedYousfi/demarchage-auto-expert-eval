@@ -76,7 +76,8 @@ interface jobDescription {
    };
    return mockJobDescription;
 }`,
-    text
+    text,
+    "gpt-4.1-mini"
   );
 
   try {
