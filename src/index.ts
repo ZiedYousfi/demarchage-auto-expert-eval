@@ -55,6 +55,26 @@ interface jobDescription {
     location: string;
     language: string;
     experienceLevel: string;
+}
+    Here is an example of a job description in JSON format:
+{
+   title: "DevOps Engineer",
+     description:
+       "We are looking for a skilled DevOps Engineer to join our team.",
+     requirements: [
+       "Cloud computing experience",
+       "Container orchestration knowledge",
+     ],
+     responsibilities: [
+       "Implement CI/CD pipelines",
+       "Manage cloud infrastructure",
+     ],
+     company: "Tech Innovations Inc.",
+     location: "Remote",
+     language: "English",
+     experienceLevel: "Senior",
+   };
+   return mockJobDescription;
 }`,
     text
   );
