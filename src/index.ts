@@ -1,3 +1,4 @@
+/// <reference path="./global.d.ts" />
 import { generateSqlScript } from "./sqlCreator";
 import readline from "node:readline";
 
@@ -15,8 +16,16 @@ async function askQuestion(query: string): Promise<string> {
 async function userInputJobDescription(): Promise<jobDescription> {
   const title = await askQuestion("Enter job title: ");
   const description = await askQuestion("Enter job description: ");
-  const requirements = (await askQuestion("Enter job requirements (comma-separated): ")).split(",").map(req => req.trim());
-  const responsibilities = (await askQuestion("Enter job responsibilities (comma-separated): ")).split(",").map(resp => resp.trim());
+  const requirements = (
+    await askQuestion("Enter job requirements (comma-separated): ")
+  )
+    .split(",")
+    .map((req) => req.trim());
+  const responsibilities = (
+    await askQuestion("Enter job responsibilities (comma-separated): ")
+  )
+    .split(",")
+    .map((resp) => resp.trim());
   const company = await askQuestion("Enter company name: ");
   const location = await askQuestion("Enter job location: ");
   const language = await askQuestion("Enter job language: ");
@@ -34,8 +43,8 @@ async function userInputJobDescription(): Promise<jobDescription> {
 }
 
 async function main() {
-  const jobDescription: jobDescription = await userInputJobDescription();
-  const sqlScript = await generateSqlScript(jobDescription);
+  const jobDesc: jobDescription = await userInputJobDescription();
+  const sqlScript = await generateSqlScript(jobDesc);
   console.log(sqlScript);
   rl.close();
 }

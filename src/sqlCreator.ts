@@ -1,3 +1,5 @@
+/// <reference path="./global.d.ts" />
+
 // System prompt for the SQL-test-generator assistant
 const SYSTEM_PROMPT = `
 // It contains **all** business rules, DB schema, and quality-control
