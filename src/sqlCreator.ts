@@ -158,17 +158,18 @@ import dotenv from "dotenv";
 dotenv.config();
 const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-export async function generateSqlScript(jobDescription: string): Promise<string> {
+export async function generateSqlScript(
+  jobDescription: jobDescription
+): Promise<string> {
   try {
     const response = await client.responses.create({
       model: "gpt-4.1",
       input: [
         { role: "system", content: SYSTEM_PROMPT },
-        { role: "user", content: jobDescription },
+        { role: "user", content: JSON.stringify(jobDescription) },
       ],
     });
-
-      return response.output_text.trim();
+    return response.output_text.trim();
   } catch (error) {
     console.error("Error generating SQL script:", error);
     throw error;
