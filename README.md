@@ -168,6 +168,9 @@ The application includes comprehensive error handling for:
 This project is licensed under the [CC BY-NC 4.0 License](https://creativecommons.org/licenses/by-nc/4.0/).
 [![CC BY-NC 4.0][cc-by-nc-shield]][cc-by-nc]
 
+[cc-by-nc-shield]: https://licensebuttons.net/l/by-nc/4.0/88x31.png
+[cc-by-nc]: https://creativecommons.org/licenses/by-nc/4.0/
+
 ## Support
 
 For issues or questions, please create an issue in the repository.
