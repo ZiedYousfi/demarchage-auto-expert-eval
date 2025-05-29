@@ -86,26 +86,6 @@ interface jobDescription {
     console.error("Failed to parse job description from response:", response);
     throw e;
   }
-
-  //   const mockJobDescription: jobDescription = {
-  //     title: "devops engineer",
-  //     description:
-  //       "We are looking for a skilled DevOps Engineer to join our team.",
-  //     // This is a mock job description. In a real scenario, you would extract this from the provided text.
-  //     requirements: [
-  //       "Cloud computing experience",
-  //       "Container orchestration knowledge",
-  //     ],
-  //     responsibilities: [
-  //       "Implement CI/CD pipelines",
-  //       "Manage cloud infrastructure",
-  //     ],
-  //     company: "Tech Innovations Inc.",
-  //     location: "Remote",
-  //     language: "English",
-  //     experienceLevel: "Senior",
-  //   };
-  //   return mockJobDescription;
 }
 
 async function main() {
