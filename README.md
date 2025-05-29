@@ -165,7 +165,8 @@ The application includes comprehensive error handling for:
 
 ## License
 
-ISC License
+This project is licensed under the [CC BY-NC 4.0 License](https://creativecommons.org/licenses/by-nc/4.0/).
+[![CC BY-NC 4.0][cc-by-nc-shield]][cc-by-nc]
 
 ## Support
 
