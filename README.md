@@ -22,7 +22,7 @@ An AI-powered tool that automatically generates MySQL scripts for creating recru
 
    ```bash
    git clone https://github.com/ZiedYousfi/demarchage-auto-expert-eval
-   cd demarchage-auto
+   cd demarchage-auto-expert-eval
    ```
 
 2. Install dependencies:
