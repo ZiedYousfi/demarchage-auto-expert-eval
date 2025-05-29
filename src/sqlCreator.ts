@@ -155,23 +155,14 @@ WHERE q.category_id IN (@cat_dist,@cat_model,…,@cat_devops);
 */
 `;
 
-import OpenAI from "openai";
-import dotenv from "dotenv";
-dotenv.config();
-const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+import { generateAnswer } from "./opaiApiCaller";
 
 export async function generateSqlScript(
   jobDescription: jobDescription
 ): Promise<string> {
   try {
-    const response = await client.responses.create({
-      model: "gpt-4.1",
-      input: [
-        { role: "system", content: SYSTEM_PROMPT },
-        { role: "user", content: JSON.stringify(jobDescription) },
-      ],
-    });
-    return response.output_text.trim();
+    const response = await generateAnswer(SYSTEM_PROMPT, JSON.stringify(jobDescription));
+    return response;
   } catch (error) {
     console.error("Error generating SQL script:", error);
     throw error;
