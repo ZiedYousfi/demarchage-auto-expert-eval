@@ -42,8 +42,23 @@ async function userInputJobDescription(): Promise<jobDescription> {
   };
 }
 
+async function jobDescriptionOutOfText(text: string): Promise<jobDescription> {
+  const jobDescription: jobDescription = {
+    title: "devops engineer",
+    description: 'We are looking for a skilled DevOps Engineer to join our team.',
+    // This is a mock job description. In a real scenario, you would extract this from the provided text.
+    requirements: ["Cloud computing experience", "Container orchestration knowledge"],
+    responsibilities: ["Implement CI/CD pipelines", "Manage cloud infrastructure"],
+    company: "Tech Innovations Inc.",
+    location: "Remote",
+    language: "English",
+    experienceLevel: "Senior",
+  };
+  return jobDescription;
+}
+
 async function main() {
-  const jobDesc: jobDescription = await userInputJobDescription();
+  const jobDesc: jobDescription = await jobDescriptionOutOfText("");
   const sqlScript = await generateSqlScript(jobDesc);
   console.log(sqlScript);
   rl.close();
