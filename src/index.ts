@@ -73,9 +73,7 @@ interface jobDescription {
      location: "Remote",
      language: "English",
      experienceLevel: "Senior",
-   };
-   return mockJobDescription;
-}`,
+   };`,
     text,
     "gpt-4.1-mini"
   );
