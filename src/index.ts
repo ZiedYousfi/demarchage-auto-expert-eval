@@ -123,7 +123,7 @@ Bonjour M. Klinghoffer,
 
 Je me permets de vous contacter afin de vous présenter un outil innovant que vous pourriez intégrer à votre processus de recrutement pour le poste de Verkaufsberater chez JUST Schweiz.
 
-Nous avons développé une plateforme de tests techniques entièrement personnalisables, qui vous permet d’évaluer rapidement et efficacement les compétences des candidats avant même l'entretien.
+Nous avons développé une plateforme de tests techniques entièrement personnalisables, qui vous permet d'évaluer rapidement et efficacement les compétences des candidats avant même l'entretien.
 
 ✅ Avantages pour votre recrutement :
 Test adapté au poste : Les questions sont spécifiquement conçues pour refléter les exigences du rôle de conseiller(ère) en vente directe chez JUST Schweiz, avec un niveau expert.
@@ -132,7 +132,7 @@ Gain de temps : Vous filtrez automatiquement les profils les plus qualifiés.
 
 Équité : Tous les candidats passent le même test dans les mêmes conditions.
 
-Accessibilité : Les tests sont accessibles en ligne depuis n’importe quel appareil, sans installation.
+Accessibilité : Les tests sont accessibles en ligne depuis n'importe quel appareil, sans installation.
 
 👇 Comment ça fonctionne :
 Nous créons pour vous un test complet (déjà prêt pour ce poste) avec 6 catégories de compétences clés, chacune composée de questions techniques expertes.
@@ -165,7 +165,9 @@ interface mail {
     to: string;
     subject: string;
     body: string;
-}`,
+}
+
+IMPORTANT: Return ONLY valid JSON without any markdown formatting or code blocks.`,
     JSON.stringify(job) +
       sqlScript +
       "Please write the mail in " +
@@ -177,7 +179,17 @@ interface mail {
 
   let mailFinal: mail;
   try {
-    mailFinal = JSON.parse(mail);
+    // Clean up response in case it contains markdown code blocks
+    let cleanedMail = mail.trim();
+    if (cleanedMail.startsWith("```json")) {
+      cleanedMail = cleanedMail
+        .replace(/^```json\s*/, "")
+        .replace(/\s*```$/, "");
+    } else if (cleanedMail.startsWith("```")) {
+      cleanedMail = cleanedMail.replace(/^```\s*/, "").replace(/\s*```$/, "");
+    }
+
+    mailFinal = JSON.parse(cleanedMail);
     mailFinal.to = to;
 
     return mailFinal;
