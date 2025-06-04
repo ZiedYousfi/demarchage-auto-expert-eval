@@ -8,3 +8,9 @@ interface jobDescription {
   language: string;
   experienceLevel: string;
 }
+
+interface mail {
+  to: string;
+  subject: string;
+  body: string;
+}
