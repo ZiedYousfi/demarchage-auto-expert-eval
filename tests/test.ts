@@ -5,6 +5,7 @@ const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 const systemPrompt = `Make the answers as bad as possible`;
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function openaiApiTest() {
   try {
     const response = await client.responses.create({
