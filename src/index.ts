@@ -179,7 +179,6 @@ IMPORTANT: Return ONLY valid JSON without any markdown formatting or code blocks
 
   let mailFinal: mail;
   try {
-    // Clean up response in case it contains markdown code blocks
     let cleanedMail = mail.trim();
     if (cleanedMail.startsWith("```json")) {
       cleanedMail = cleanedMail
