@@ -1,4 +1,4 @@
-/// <reference path="./global.d.ts" />
+import type { jobDescription } from "./global";
 
 // System prompt for the SQL-test-generator assistant
 const SYSTEM_PROMPT = `
@@ -161,7 +161,10 @@ export async function generateSqlScript(
   jobDescription: jobDescription
 ): Promise<string> {
   try {
-    const response = await generateAnswer(SYSTEM_PROMPT, JSON.stringify(jobDescription));
+    const response = await generateAnswer(
+      SYSTEM_PROMPT,
+      JSON.stringify(jobDescription)
+    );
     return response;
   } catch (error) {
     console.error("Error generating SQL script:", error);

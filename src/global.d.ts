@@ -1,4 +1,4 @@
-interface jobDescription {
+export interface jobDescription {
   title: string;
   description: string;
   requirements: string[];
@@ -9,7 +9,7 @@ interface jobDescription {
   experienceLevel: string;
 }
 
-interface mail {
+export interface mail {
   to: string;
   subject: string;
   body: string;

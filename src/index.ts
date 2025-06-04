@@ -1,4 +1,4 @@
-/// <reference path="./global.d.ts" />
+import type { jobDescription, mail } from "./global";
 import { generateSqlScript } from "./sqlCreator";
 import { generateAnswer } from "./opaiApiCaller";
 import readline from "node:readline";
