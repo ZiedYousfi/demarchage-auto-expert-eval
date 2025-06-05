@@ -149,7 +149,14 @@ app.get('/', async (req, res) => {
   const sqlScript = await generateSqlScript(jobDescription);
   const mail = await generateMail(jobDescription, sqlScript, reqExpected.mailTo);
 
-})
+  const responseBody = {
+    mail: mail,
+    sqlScript: sqlScript,
+  };
+
+  res.json(responseBody);
+});
 
 app.listen(port, () => {
-})
+  console.log(`Server is running on port ${port}`);
+});
