@@ -141,27 +141,28 @@ IMPORTANT: Return ONLY valid JSON without any markdown formatting or code blocks
   }
 }
 
-app.get("/", async (req, res) => {
+app.get("/", async (req: express.Request, res: express.Response) => {
   try {
     // Validate request
     if (!req.query.data) {
-      return res.status(400).json({ error: "Missing 'data' query parameter" });
+      res.status(400).json({ error: "Missing 'data' query parameter" });
+      return;
     }
 
     let reqExpected: requestExpected;
     try {
       reqExpected = JSON.parse(req.query.data as string);
     } catch (e) {
-      return res
-        .status(400)
-        .json({ error: "Invalid JSON in 'data' parameter" });
+      res.status(400).json({ error: "Invalid JSON in 'data' parameter" });
+      return;
     }
 
     // Validate required fields
     if (!reqExpected.jobDescriptionAsText || !reqExpected.mailTo) {
-      return res.status(400).json({
+      res.status(400).json({
         error: "Missing required fields: jobDescriptionAsText or mailTo",
       });
+      return;
     }
 
     console.log("Received request:", reqExpected);
