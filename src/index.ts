@@ -2,10 +2,11 @@ import type { jobDescription, mail } from "./global";
 import { generateSqlScript } from "./sqlCreator";
 import { generateAnswer } from "./opaiApiCaller";
 import dotenv from "dotenv";
-import * as e from "express";
+import express from "express";
 dotenv.config();
 
 const port = process.env.PORT || 8000;
+const app = express();
 
 async function jobDescriptionOutOfText(text: string): Promise<jobDescription> {
   const response = await generateAnswer(
@@ -139,3 +140,10 @@ IMPORTANT: Return ONLY valid JSON without any markdown formatting or code blocks
   }
 }
 
+
+app.get('/', (req, res) => {
+
+})
+
+app.listen(port, () => {
+})

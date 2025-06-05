@@ -14,3 +14,8 @@ export interface mail {
   subject: string;
   body: string;
 }
+
+export interface requestExpected {
+  jobDescriptionAsText: string;
+  mailTo: string;
+}
