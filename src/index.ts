@@ -7,6 +7,7 @@ dotenv.config();
 
 const port = process.env.PORT || 8000;
 const app = express();
+app.use(express.json());
 
 async function jobDescriptionOutOfText(text: string): Promise<jobDescription> {
   const response = await generateAnswer(
@@ -140,21 +141,51 @@ IMPORTANT: Return ONLY valid JSON without any markdown formatting or code blocks
   }
 }
 
+app.get("/", async (req, res) => {
+  try {
+    // Validate request
+    if (!req.query.data) {
+      return res.status(400).json({ error: "Missing 'data' query parameter" });
+    }
 
-app.get('/', async (req, res) => {
-  const reqExpected: requestExpected  = JSON.parse(req.query.data as string);
-  console.log("Received request:", reqExpected);
+    let reqExpected: requestExpected;
+    try {
+      reqExpected = JSON.parse(req.query.data as string);
+    } catch (e) {
+      return res
+        .status(400)
+        .json({ error: "Invalid JSON in 'data' parameter" });
+    }
 
-  const jobDescription = await jobDescriptionOutOfText(reqExpected.jobDescriptionAsText);
-  const sqlScript = await generateSqlScript(jobDescription);
-  const mail = await generateMail(jobDescription, sqlScript, reqExpected.mailTo);
+    // Validate required fields
+    if (!reqExpected.jobDescriptionAsText || !reqExpected.mailTo) {
+      return res.status(400).json({
+        error: "Missing required fields: jobDescriptionAsText or mailTo",
+      });
+    }
 
-  const responseBody = {
-    mail: mail,
-    sqlScript: sqlScript,
-  };
+    console.log("Received request:", reqExpected);
 
-  res.json(responseBody);
+    const jobDescription = await jobDescriptionOutOfText(
+      reqExpected.jobDescriptionAsText
+    );
+    const sqlScript = await generateSqlScript(jobDescription);
+    const mail = await generateMail(
+      jobDescription,
+      sqlScript,
+      reqExpected.mailTo
+    );
+
+    const responseBody = {
+      mail: mail,
+      sqlScript: sqlScript,
+    };
+
+    res.json(responseBody);
+  } catch (error) {
+    console.error("Error processing request:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
 app.listen(port, () => {
