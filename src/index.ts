@@ -134,6 +134,14 @@ IMPORTANT: Return ONLY valid JSON without any markdown formatting or code blocks
     mailFinal = JSON.parse(cleanedMail);
     mailFinal.to = to;
 
+    console.log("Generated mail:", mailFinal);
+    if (!mailFinal.subject || !mailFinal.body) {
+      throw new Error("Generated mail is missing subject or body");
+    }
+    if (!mailFinal.to) {
+      throw new Error("Generated mail is missing recipient 'to' field");
+    }
+
     return mailFinal;
   } catch (e) {
     console.error("Failed to parse mail from response:", mail);

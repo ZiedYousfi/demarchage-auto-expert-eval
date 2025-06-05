@@ -160,11 +160,14 @@ import { generateAnswer } from "./opaiApiCaller";
 export async function generateSqlScript(
   jobDescription: jobDescription
 ): Promise<string> {
+  console.log("Generating SQL script for the job description...");
   try {
     const response = await generateAnswer(
       SYSTEM_PROMPT,
       JSON.stringify(jobDescription)
     );
+    console.log("Response from OpenAI:", response);
+    console.log("SQL script generated successfully.");
     return response;
   } catch (error) {
     console.error("Error generating SQL script:", error);
