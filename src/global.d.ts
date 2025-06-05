@@ -19,3 +19,8 @@ export interface requestExpected {
   jobDescriptionAsText: string;
   mailTo: string;
 }
+
+export interface responseBody {
+  mail: mail;
+  sqlScript: string;
+}

@@ -1,4 +1,4 @@
-import type { jobDescription, mail } from "./global";
+import type { jobDescription, mail, requestExpected } from "./global";
 import { generateSqlScript } from "./sqlCreator";
 import { generateAnswer } from "./opaiApiCaller";
 import dotenv from "dotenv";
@@ -141,7 +141,13 @@ IMPORTANT: Return ONLY valid JSON without any markdown formatting or code blocks
 }
 
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
+  const reqExpected: requestExpected  = JSON.parse(req.query.data as string);
+  console.log("Received request:", reqExpected);
+
+  const jobDescription = await jobDescriptionOutOfText(reqExpected.jobDescriptionAsText);
+  const sqlScript = await generateSqlScript(jobDescription);
+  const mail = await generateMail(jobDescription, sqlScript, reqExpected.mailTo);
 
 })
 
