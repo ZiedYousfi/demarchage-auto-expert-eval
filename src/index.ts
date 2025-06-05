@@ -1,47 +1,6 @@
 import type { jobDescription, mail } from "./global";
 import { generateSqlScript } from "./sqlCreator";
 import { generateAnswer } from "./opaiApiCaller";
-import readline from "node:readline";
-
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
-
-async function askQuestion(query: string): Promise<string> {
-  return new Promise((resolve) => {
-    rl.question(query, (answer) => resolve(answer));
-  });
-}
-
-async function userInputJobDescription(): Promise<jobDescription> {
-  const title = await askQuestion("Enter job title: ");
-  const description = await askQuestion("Enter job description: ");
-  const requirements = (
-    await askQuestion("Enter job requirements (comma-separated): ")
-  )
-    .split(",")
-    .map((req) => req.trim());
-  const responsibilities = (
-    await askQuestion("Enter job responsibilities (comma-separated): ")
-  )
-    .split(",")
-    .map((resp) => resp.trim());
-  const company = await askQuestion("Enter company name: ");
-  const location = await askQuestion("Enter job location: ");
-  const language = await askQuestion("Enter job language: ");
-  const experienceLevel = await askQuestion("Enter experience level: ");
-  return {
-    title,
-    description,
-    requirements,
-    responsibilities,
-    company,
-    location,
-    language,
-    experienceLevel,
-  };
-}
 
 async function jobDescriptionOutOfText(text: string): Promise<jobDescription> {
   const response = await generateAnswer(
@@ -85,28 +44,6 @@ interface jobDescription {
     console.error("Failed to parse job description from response:", response);
     throw e;
   }
-}
-
-async function main() {
-  let jobDesc: jobDescription;
-  const text = await askQuestion(
-    "Enter the job description text (or press Enter to use manual input): "
-  );
-  if (text.trim()) {
-    console.log("Extracting job description from text...");
-    jobDesc = await jobDescriptionOutOfText(text);
-    console.log("Job description extracted successfully.");
-  } else {
-    console.log("Using manual input for job description.");
-    jobDesc = await userInputJobDescription();
-    console.log("Job description input successfully.");
-  }
-  console.log("Generating SQL script for the job description...");
-  const sqlScript = await generateSqlScript(jobDesc);
-  console.log(sqlScript);
-  const mail = await generateMail(jobDesc, sqlScript, "zied.essaber@gmail.com");
-  console.log(mail);
-  rl.close();
 }
 
 async function generateMail(
@@ -197,4 +134,4 @@ IMPORTANT: Return ONLY valid JSON without any markdown formatting or code blocks
   }
 }
 
-main();
+
