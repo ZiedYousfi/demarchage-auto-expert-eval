@@ -173,8 +173,7 @@ IMPORTANT: Return ONLY valid JSON without any markdown formatting or code blocks
       "Please write the mail in " +
       job.language +
       " and address it to " +
-      to,
-    "gpt-4.1-mini"
+      to
   );
 
   let mailFinal: mail;
