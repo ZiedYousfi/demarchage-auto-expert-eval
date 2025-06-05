@@ -153,7 +153,7 @@ app.get("/", async (req: express.Request, res: express.Response) => {
     try {
       reqExpected = JSON.parse(req.query.data as string);
     } catch (e) {
-      res.status(400).json({ error: "Invalid JSON in 'data' parameter" });
+      res.status(400).json({ error: `Invalid JSON in 'data' parameter ${e}` });
       return;
     }
 
